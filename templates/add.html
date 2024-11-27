@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+<!--Don't forget your import here-->
+{% block title %}Add A New Cafe{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8">
+
+      <h1>Add a new cafe into the database</h1>
+
+      <!-- This is where your WTForm will go -->
+      <form method="POST" action="{{ url_for('add_cafe') }}">
+                {{ form.hidden_tag() }}
+                <div class="mb-3">
+                    {{ form.cafe.label(class="form-label") }}
+                    {{ form.cafe(class="form-control") }}
+                </div>
+                <div class="mb-3">
+                    {{ form.location.label(class="form-label") }}
+                    {{ form.location(class="form-control") }}
+                    {% for field, errors in form.errors.items() %}
+                    <div class="alert alert-danger">
+                        <strong>{{ field }}</strong>: {{ errors[0] }}
+                     </div>
+                    {% endfor %}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.opening_time.label(class="form-label") }}
+                    {{ form.opening_time(class="form-control") }}
+                </div>
+                <div class="mb-3">
+                    {{ form.closing_time.label(class="form-label") }}
+                    {{ form.closing_time(class="form-control") }}
+                </div>
+                <div class="mb-3">
+                    {{ form.coffee_rating.label(class="form-label") }}
+                    {{ form.coffee_rating(class="form-select") }}
+                </div>
+                <div class="mb-3">
+                    {{ form.wifi_rating.label(class="form-label") }}
+                    {{ form.wifi_rating(class="form-select") }}
+                </div>
+                <div class="mb-3">
+                    {{ form.power_rating.label(class="form-label") }}
+                    {{ form.power_rating(class="form-select") }}
+                </div>
+                <div class="text-center">
+                    {{ form.submit(class="btn btn-primary") }}
+                </div>
+            </form>
+	  <p class="space-above"><a href="{{ url_for('cafes') }}">See all cafes</a></p>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}
